@@ -1,0 +1,16 @@
+{
+  "name": "messagego",
+  "version": "0.1.0",
+  "description": "Un chat tipo telegram",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Chat",
+    "Message",
+    "server"
+  ],
+  "author": "German Rangel",
+  "license": "ISC"
+}
