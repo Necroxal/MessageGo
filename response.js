@@ -1,3 +1,5 @@
+//manejo de respuestas
+const chalk = require('chalk');
 exports.succes = function(req,res, message, status){
     res.status(status || 200).send({
         error: '',
@@ -5,7 +7,8 @@ exports.succes = function(req,res, message, status){
     });
 }
 
-exports.error = function(req,res, error, status){
+exports.error = function(req,res, error, status, details){
+    console.error(chalk.red('[response error]'+details));
     res.status(status || 500).send({
         error: error,
         body: ''
