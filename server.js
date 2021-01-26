@@ -20,16 +20,15 @@ router.get('/message', function(req,res){
 router.post('/message', function(req,res){
     console.log(req.query);
     if(req.query.error == "ok"){
-        response.error(req,res,'error simulado',400);
+        response.error(req,res,'error simulado',500,'es solo un test de los errores');
     }
     else{
         response.succes(req,res,'añadido correctamente',200);
     }
 
 });
-// app.use('/', function(req, res){
-//     res.send('hola'); //Responde con un hola en el navegador
-// });
+
+app.use('/app', express.static('public'));
 
 app.listen(3000)
 console.log('La aplicacion estaá escuchando al puerto 3000')
