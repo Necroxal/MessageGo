@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const response = require('./response');
 const router = express.Router();
 
 var app = express();
@@ -14,12 +14,18 @@ router.get('/message', function(req,res){
     res.header({
         "custom-header": "Valor personalizado",
     });
-    res.send('Lista de mensajes');
+    //res.send('Lista de mensajes');
+    response.succes(req,res,'Lista de mensajes');
 });
 router.post('/message', function(req,res){
     console.log(req.query);
-    console.log(req.body);
-    res.send('Mensaje '+ req.body.text +' añadido' );
+    if(req.query.error == "ok"){
+        response.error(req,res,'error simulado',400);
+    }
+    else{
+        response.succes(req,res,'añadido correctamente',200);
+    }
+
 });
 // app.use('/', function(req, res){
 //     res.send('hola'); //Responde con un hola en el navegador
