@@ -1,32 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const response = require('./response');
-const router = express.Router();
-
+//const router = require('./components/message/network')
+const router = require('./network/routes');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(router);
-
+//app.use(router);
+router(app);
 //Router mini apps
-router.get('/message', function(req,res){
-    console.log(req.headers);
-    res.header({
-        "custom-header": "Valor personalizado",
-    });
-    //res.send('Lista de mensajes');
-    response.succes(req,res,'Lista de mensajes');
-});
-router.post('/message', function(req,res){
-    console.log(req.query);
-    if(req.query.error == "ok"){
-        response.error(req,res,'error simulado',500,'es solo un test de los errores');
-    }
-    else{
-        response.succes(req,res,'añadido correctamente',200);
-    }
 
-});
 
 app.use('/app', express.static('public'));
 
