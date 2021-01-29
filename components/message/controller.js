@@ -1,4 +1,5 @@
 //Funcion, quien la añade y que añade (user, message)
+const store = require('./store');
 const chalk = require('chalk');
 
 function addMessage(user, message) {
@@ -14,7 +15,7 @@ function addMessage(user, message) {
             date: new Date()
         };
 
-        console.log(fullMessage);
+        store.add(fullMessage);
         resolve(fullMessage);
 
     });
@@ -22,6 +23,12 @@ function addMessage(user, message) {
 
 }
 
+function getMessage(){
+    return new Promise((resolve,reject) =>{
+        resolve(store.list());
+    });
+}
 module.exports = {
     addMessage,
+    getMessage
 };

@@ -5,12 +5,13 @@ const router = express.Router();
 //Metodos get y post
 
 router.get('', function(req,res){
-    console.log(req.headers);
-    res.header({
-        "custom-header": "Valor personalizado",
+    controller.getMessage()
+    .then((messageList)=>{
+        response.succes(req,res,messageList,200);
+    })
+    .catch(e=>{
+        response.error(req,res, 'Unexpected Error',500,e);
     });
-    //res.send('Lista de mensajes');
-    response.succes(req,res,'Lista de mensajes');
 });
 router.post('', function(req,res){
     controller.addMessage(req.body.user, req.body.message)
