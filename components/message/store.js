@@ -1,17 +1,22 @@
 const db = require("mongoose")
 const Model = require('./model')
-
+const url = 'mongodb+srv://german:145689@cluster0.gx4fd.mongodb.net/messagego?retryWrites=true&w=majority';
 db.Promise = global.Promise //Devuelva las promesas
-db.connect('mongodb+srv://root:<root>@cluster0.gx4fd.mongodb.net/<MessageGo>?retryWrites=true&w=majority',{
-    useNewUrlParser: true, //No haya problema de compatibilidad
-    useUnifiedTopology: true //
-})
+db.connect(url, { useNewUrlParser: true , useUnifiedTopology: true })
+  .then(() => console.log('[db] Conectada con éxito'))
+  .catch(err => console.error('[db]', err));
 
 function addMessage(message){
-    list.push(message);
+    //list.push(message);
+    //Usando mongoDb
+    const myMessage = new Model(message);
+    myMessage.save();
 }
-function getMessage(){
-    return list;
+//devolverlo a traves de la api
+async function getMessage(){
+    //return list;
+    const messages =  await Model.find(); //Pedir todos los documetos
+    return messages;
 }
 
 module.exports = {
