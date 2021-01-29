@@ -13,5 +13,5 @@ const mySchema = new Schema({
     date: Date
 });
 
-const model = mongoose.model('Message', mySchema); //Collecion en mongo y el esquema
+const model = mongoose.model('message', mySchema); //Collecion en mongo y el esquema
 module.exports = model;
