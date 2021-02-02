@@ -1,7 +1,7 @@
 //Funcion, quien la añade y que añade (user, message)
 const store = require('./store');
 const chalk = require('chalk');
-
+//controlador para añadir mensaje
 function addMessage(user, message) {
     return new Promise((resolve, reject) => {
         if (!user || !message) {
@@ -22,13 +22,25 @@ function addMessage(user, message) {
 
 
 }
-
+//para ver mensaje
 function getMessage(){
     return new Promise((resolve,reject) =>{
         resolve(store.list());
     });
 }
+//async/await estamos interactuando con otro metodo que es asincrono, en este caso los metodos de store
+function updateMessage(id, message){
+    return new Promise(async (resolve,reject)=>{
+        if (!id || !message){
+            reject('Datos invalidos');
+            return false;
+        }
+        const result =  await store.updateText(id,message);
+        resolve(result);
+    });
+}
 module.exports = {
     addMessage,
-    getMessage
+    getMessage,
+    updateMessage
 };

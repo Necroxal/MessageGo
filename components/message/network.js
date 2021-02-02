@@ -3,7 +3,7 @@ const response = require('../../network/response');
 const controller = require('./controller');
 const router = express.Router();
 //Metodos get y post
-
+//Veer mensajes
 router.get('', function(req,res){
     controller.getMessage()
     .then((messageList)=>{
@@ -13,6 +13,7 @@ router.get('', function(req,res){
         response.error(req,res, 'Unexpected Error',500,e);
     });
 });
+//Añadir mensajes
 router.post('', function(req,res){
     controller.addMessage(req.body.user, req.body.message)
     .then((fullmesagge) => {
@@ -22,5 +23,15 @@ router.post('', function(req,res){
     });
 
 });
+//Actualizar mensajes
+router.patch('/:id', function(req,res){ //Se puede acceder a ese id con params
+    controller.updateMessage(req.params.id, req.body.message)
+    .then((data)=>{
+        response.succes(req,res,data,200);
+    })
+    .catch(e =>{
+        response.error(req,res,'Error interno',500,e);
+    });
 
+});
 module.exports = router;

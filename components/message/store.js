@@ -19,7 +19,17 @@ async function getMessage(){
     return messages;
 }
 
+async function updateText(id, message){
+    const founMessage = await Model.findOne({ //devuleve la primera aparacion d ela busqueda
+        _id: id // Base de datos tomara el id que nos ha venido desde la url
+    });
+    founMessage.message = message;
+    const newMessage = await founMessage.save();
+    return newMessage;
+}
 module.exports = {
     add: addMessage,
-    list: getMessage
+    list: getMessage,
+    updateText: updateText
+
 }
