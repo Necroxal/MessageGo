@@ -39,8 +39,24 @@ function updateMessage(id, message){
         resolve(result);
     });
 }
+function deleteMessage(id){
+    return new Promise((resolve,reject)=>{
+        if(!id){
+            reject('Datos ivalidos');
+            return false;
+        }
+        store.removeMessage(id)
+        .then(() => {
+            resolve();
+            
+        }).catch(e => {
+            reject(e);
+        });
+    });
+}
 module.exports = {
     addMessage,
     getMessage,
-    updateMessage
+    updateMessage,
+    deleteMessage
 };

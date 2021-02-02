@@ -30,9 +30,14 @@ async function updateText(id, message){
     const newMessage = await founMessage.save();
     return newMessage;
 }
+function removeMessage(id){
+    return Model.deleteOne({
+        _id:id
+    });
+}
 module.exports = {
     add: addMessage,
     list: getMessage,
-    updateText: updateText
-
+    updateText: updateText,
+    removeMessage: removeMessage
 }
