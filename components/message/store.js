@@ -13,9 +13,12 @@ function addMessage(message){
     myMessage.save();
 }
 //devolverlo a traves de la api
-async function getMessage(){
-    //return list;
-    const messages =  await Model.find(); //Pedir todos los documetos
+async function getMessage(filterUser){
+    let filter = {} 
+    if(filterUser !== null){
+        filter = {user: filterUser}; //mongo db muestra los usarios que estan en el filter user
+    }
+    const messages =  await Model.find(filter); //Pedir todos los documetos
     return messages;
 }
 

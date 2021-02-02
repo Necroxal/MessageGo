@@ -23,9 +23,9 @@ function addMessage(user, message) {
 
 }
 //para ver mensaje
-function getMessage(){
+function getMessage(filterUser){ 
     return new Promise((resolve,reject) =>{
-        resolve(store.list());
+        resolve(store.list(filterUser));
     });
 }
 //async/await estamos interactuando con otro metodo que es asincrono, en este caso los metodos de store

@@ -5,7 +5,8 @@ const router = express.Router();
 //Metodos get y post
 //Veer mensajes
 router.get('', function(req,res){
-    controller.getMessage()
+    const filterMessage =  req.query.user || null; 
+    controller.getMessage(filterMessage) //si se tiene que filtrar una informacion y si no vendrá null
     .then((messageList)=>{
         response.succes(req,res,messageList,200);
     })
