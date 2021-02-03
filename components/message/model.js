@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //A traves de un obejto definir todas las propiedades que queremos tenr 
 const mySchema = new Schema({
-    user: String,
+    user: {
+        type: Schema.ObjectId, //va  a recibir un identificador de mongo
+        ref: 'User', //referenciando a la collecion User
+    },
     //Se creo message tipo objeto para mandar un mensaje estrcito y no se guarde ningun tipo de info
     //que no sea mensjae
     message: {
