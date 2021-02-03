@@ -17,7 +17,8 @@ function getMessage(filterUser) {
             }; //mongo db muestra los usarios que estan en el filter user
         }
         Model.find(filter) //Pedir todos los documetos
-            .populate('user') //Buscar dentro de cada elemnto de cada colecicon y popualrlos
+        //popukate permite hacer referencia a documentos en otras colecicones
+            .populate('user') //Buscar dentro de cada elemento de la colecion de mongo (los objectId) y popularlos
             .exec((error, populatedData) => {
                 if (error) {
                     reject(error);
