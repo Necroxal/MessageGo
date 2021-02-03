@@ -1,10 +1,5 @@
-const db = require("mongoose")
-const Model = require('./model')
-const url = 'mongodb+srv://german:145689@cluster0.gx4fd.mongodb.net/messagego?retryWrites=true&w=majority';
-db.Promise = global.Promise //Devuelva las promesas
-db.connect(url, { useNewUrlParser: true , useUnifiedTopology: true })
-  .then(() => console.log('[db] Conectada con éxito'))
-  .catch(err => console.error('[db]', err));
+const Model = require('./model');
+
 
 function addMessage(message){
     //list.push(message);
