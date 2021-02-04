@@ -8,6 +8,6 @@ const mySchema = new Schema({
         ref: 'User',
     }]
 });
-
+ //Pendientes
 const model = mongoose.model('Chat', mySchema); //Collecion en mongo y el esquema
 module.exports = model;
