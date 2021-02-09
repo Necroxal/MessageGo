@@ -18,7 +18,8 @@ const mySchema = new Schema({
         type: String,
         required: true,
     },
-    date: Date
+    date: Date,
+    file: String,
 });
 
 const model = mongoose.model('message', mySchema); //Collecion en mongo y el esquema

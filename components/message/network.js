@@ -1,13 +1,18 @@
 const express = require('express');
-const multer = require('multer');
+const path = require('path'); //extrae nombre del archivo de una ruta
+const multer = require('multer'); //permite manjear el multi-plataform para manipular archivos
 const response = require('../../network/response');
 const controller = require('./controller');
 const router = express.Router();
 //Metodos get y post
 //Veer mensajes y/o ver mensajes de usarios en especifico
-const upload = multer({
-    dest: 'uploads/',
-});
+const storage = multer.diskStorage({ //
+    destination:  "public/files",
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+  })
+const upload = multer({ storage: storage })
 
 router.get('/', function(req,res){
     const filterMessage =  req.query.chat || null; 
@@ -21,7 +26,7 @@ router.get('/', function(req,res){
 });
 //Añadir mensajes
 router.post('/',upload.single('file'), function(req,res){
-    controller.addMessage(req.body.chat,req.body.user, req.body.message)
+    controller.addMessage(req.body.chat,req.body.user, req.body.message, req.file)
     .then((fullmesagge) => {
         response.succes(req,res,fullmesagge,200);
     }).catch((e) => {
