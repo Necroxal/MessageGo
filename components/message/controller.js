@@ -2,14 +2,16 @@
 const store = require('./store');
 const chalk = require('chalk');
 //controlador para añadir mensaje
-function addMessage(user, message) {
+function addMessage(chat,user, message) {
     return new Promise((resolve, reject) => {
-        if (!user || !message) {
-            console.error(chalk.blue('[MessaggeController] No hay usuario o mensaje'));
-            return reject(chalk.red('Los datos son incorrectos'));
+        if (!chat || !user || !message) {
+            console.error(chalk.blue('[MessaggeController] No hay usuario o mensaje o chat'));
+            reject(chalk.red('Los datos son incorrectos'));
+            return false;
         }
         //fullmesagge objeto creado para añadir la fecha
         const fullMessage = {
+            chat: chat,
             user: user,
             message: message,
             date: new Date()
@@ -23,9 +25,9 @@ function addMessage(user, message) {
 
 }
 //para ver mensaje
-function getMessage(filterUser){ 
-    return new Promise((resolve,reject) =>{
-        resolve(store.list(filterUser));
+function getMessage(filterChat) {
+    return new Promise((resolve, reject) => {
+        resolve(store.list(filterChat));
     });
 }
 //async/await estamos interactuando con otro metodo que es asincrono, en este caso los metodos de store

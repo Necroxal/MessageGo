@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //A traves de un obejto definir todas las propiedades que queremos tenr 
 const mySchema = new Schema({
+    chat: {
+        type: Schema.ObjectId,
+        ref: 'Chat',
+    },
+
     user: {
         type: Schema.ObjectId, //va  a recibir un identificador de mongo
         ref: 'User', //referenciando a la collecion User

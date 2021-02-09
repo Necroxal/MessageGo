@@ -8,12 +8,12 @@ function addMessage(message) {
     myMessage.save();
 }
 //devolverlo a traves de la api
-function getMessage(filterUser) {
+async function getMessage(filterChat) {
     return new Promise((resolve, reject) => {
         let filter = {}
-        if (filterUser !== null) {
+        if (filterChat !== null) {
             filter = {
-                user: filterUser
+                chat: filterChat
             }; //mongo db muestra los usarios que estan en el filter user
         }
         Model.find(filter) //Pedir todos los documetos
