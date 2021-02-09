@@ -1,9 +1,14 @@
 const express = require('express');
+const multer = require('multer');
 const response = require('../../network/response');
 const controller = require('./controller');
 const router = express.Router();
 //Metodos get y post
 //Veer mensajes y/o ver mensajes de usarios en especifico
+const upload = multer({
+    dest: 'uploads/',
+});
+
 router.get('/', function(req,res){
     const filterMessage =  req.query.chat || null; 
     controller.getMessage(filterMessage) //si se tiene que filtrar una informacion y si no vendrá null
@@ -15,7 +20,7 @@ router.get('/', function(req,res){
     });
 });
 //Añadir mensajes
-router.post('/', function(req,res){
+router.post('/',upload.single('file'), function(req,res){
     controller.addMessage(req.body.chat,req.body.user, req.body.message)
     .then((fullmesagge) => {
         response.succes(req,res,fullmesagge,200);
