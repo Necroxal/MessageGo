@@ -1,4 +1,4 @@
-const socketIO = require(socket.io);
+const socketIO = require('socket.io');
 const socket = {};
 
 function connect(server){

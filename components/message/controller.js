@@ -1,6 +1,7 @@
 //Funcion, quien la añade y que añade (user, message)
 const store = require('./store');
 const chalk = require('chalk');
+const  socket  = require('../../socket').socket;
 //controlador para añadir mensaje
 function addMessage(chat,user, message, file) {
     return new Promise((resolve, reject) => {
@@ -24,6 +25,9 @@ function addMessage(chat,user, message, file) {
         };
 
         store.add(fullMessage);
+
+        socket.io.emit('message', fullMessage);
+
         resolve(fullMessage);
 
     });
